@@ -1,0 +1,29 @@
+{
+    "name": "frankyframework/franky-core",
+    "type": "library",
+    "description": "Funciones de tokenizacion y escape de caracteres",
+    "authors": [
+        {
+            "name": "Ussiel Acevedo",
+            "email": "ussiel@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
+    "require-dev": {
+       "phpunit/phpunit": "^6.5"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Franky\\Core\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "FrankyTest\\Core\\": "test/"
+        }
+    },
+    "license": "MIT"
+}
