@@ -1,7 +1,7 @@
 {
     "name": "frankyframework/franky-core",
     "type": "library",
-    "description": "Funciones de tokenizacion y escape de caracteres",
+    "description": "Funciones de core",
     "authors": [
         {
             "name": "Ussiel Acevedo",
