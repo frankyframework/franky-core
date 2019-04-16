@@ -2,8 +2,6 @@
     "name": "frankyframework/franky-core",
     "type": "library",
     "description": "Funciones de core",
-    "minimum-stability": "dev",
-    "prefer-stable": false,
     "authors": [
         {
             "name": "Ussiel Acevedo",
