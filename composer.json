@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Funciones de core",
     "minimum-stability": "dev",
-    "prefer-stable": false,
+    "prefer-stable": true,
     "authors": [
         {
             "name": "Ussiel Acevedo",
