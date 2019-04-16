@@ -1,6 +1,6 @@
 <?php
 namespace Franky\Core;
-use Franky/corerequest;
+use Franky\core\request;
 
 class paginacion
 {
