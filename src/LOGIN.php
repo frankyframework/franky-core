@@ -11,7 +11,7 @@ class LOGIN
 
         function __construct($tabla = "",$user = "",$pass="",$extra = array(),$conexion = 'conexion_bd')
         {
-                $this->m_ibd = new \vendor\database\IBD(new \vendor\database\configure,$conexion, new \vendor\core\MYDEBUG);
+                $this->m_ibd = new \Franky\Database\IBD(new \Franky\Database\configure,$conexion, new \Franky\Database\Debug);
                 $this->m_tabla = $tabla;
                 $this->m_user = $user;
                 $this->m_pass = $pass;
