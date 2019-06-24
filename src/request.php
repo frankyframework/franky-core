@@ -292,7 +292,7 @@ class request
         $request = $this->getRequest();
         $path = "/".$request["my_url_friendly"];
         $path = str_replace("/$idioma/", "/", $path);
-        return ($path != "/" ? trim(str_replace("/", " ", $path)) : "home");
+        return preg_replace('#([^.a-z0-9 s]+)#i', '', ($path != "/" ? trim(str_replace("/", " ", $path)) : "home"));
     }
 
     public function getReferer()
