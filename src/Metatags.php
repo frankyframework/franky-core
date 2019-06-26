@@ -12,7 +12,7 @@ class Metatags
     var $code;
     var $hreflang;
     var $image;
-
+    var $vars;
 
     function __construct() {
         $this->titulo = "";
@@ -20,6 +20,7 @@ class Metatags
         $this->keywords = "";
         $this->autor = "";
         $this->js = array();
+        $this->vars = array();
         $this->css = array();
         $this->code = array();
         $this->hreflang = array();
@@ -29,6 +30,11 @@ class Metatags
     function setTitulo($titulo)
     {
         $this->titulo = $titulo;
+    }
+    
+    function setVars($vars)
+    {
+        $this->vars = $vars;
     }
     function setAuthor($autor)
     {
@@ -68,6 +74,10 @@ class Metatags
     function getTitulo()
     {
         return $this->titulo;
+    }
+      function getVars()
+    {
+        return $this->vars;
     }
     function getAuthor()
     {
