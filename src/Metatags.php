@@ -12,7 +12,8 @@ class Metatags
     var $code;
     var $hreflang;
     var $image;
-
+    var $vars;
+    var $plantilla
 
     function __construct() {
         $this->titulo = "";
@@ -20,15 +21,23 @@ class Metatags
         $this->keywords = "";
         $this->autor = "";
         $this->js = array();
+        $this->vars = array();
         $this->css = array();
         $this->code = array();
         $this->hreflang = array();
         $this->image = "";
+        $this->plantilla =  Plantilla();
+  
     }
 
     function setTitulo($titulo)
     {
         $this->titulo = $titulo;
+    }
+    
+    function setVars($vars)
+    {
+        $this->vars = $vars;
     }
     function setAuthor($autor)
     {
@@ -67,7 +76,12 @@ class Metatags
     }
     function getTitulo()
     {
-        return $this->titulo;
+        $plantilla->asigna_variables($this->vars);
+        return $this->plantilla->muestra($this->titulo);
+    }
+      function getVars()
+    {
+        return $this->vars;
     }
     function getAuthor()
     {
@@ -75,12 +89,14 @@ class Metatags
     }
     function getDescripcion()
     {
-        return $this->descripcion;
+        $plantilla->asigna_variables($this->vars);
+        return $this->plantilla->muestra($this->descripcion);
     }
 
     function getKeywords()
     {
-        return $this->keywords;
+        $plantilla->asigna_variables($this->vars);
+        return $this->plantilla->muestra($this->keywords);
     }
     function getJs($meta = true)
     {
@@ -122,7 +138,9 @@ class Metatags
         {
             foreach($this->code as $code)
             {
-                $html .= $code."\n";
+                $plantilla->asigna_variables($this->vars);
+                $html .=  $this->plantilla->muestra($code)."\n";
+ 
             }
         }
         return  $html;
