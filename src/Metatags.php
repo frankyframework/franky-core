@@ -13,7 +13,6 @@ class Metatags
     var $hreflang;
     var $image;
     var $vars;
-    var $plantilla;
 
     function __construct() {
         $this->titulo = "";
@@ -26,7 +25,7 @@ class Metatags
         $this->code = array();
         $this->hreflang = array();
         $this->image = "";
-        $this->plantilla =  Plantilla();
+        
   
     }
 
@@ -76,8 +75,9 @@ class Metatags
     }
     function getTitulo()
     {
+        $plantilla =  new Plantilla();
         $plantilla->asigna_variables($this->vars);
-        return $this->plantilla->muestra($this->titulo);
+        return $plantilla->muestra($this->titulo);
     }
       function getVars()
     {
@@ -89,14 +89,16 @@ class Metatags
     }
     function getDescripcion()
     {
+        $plantilla =  new Plantilla();
         $plantilla->asigna_variables($this->vars);
-        return $this->plantilla->muestra($this->descripcion);
+        return $plantilla->muestra($this->descripcion);
     }
 
     function getKeywords()
     {
+        $plantilla =  new Plantilla();
         $plantilla->asigna_variables($this->vars);
-        return $this->plantilla->muestra($this->keywords);
+        return $plantilla->muestra($this->keywords);
     }
     function getJs($meta = true)
     {
@@ -138,8 +140,9 @@ class Metatags
         {
             foreach($this->code as $code)
             {
+                $plantilla =  new Plantilla();
                 $plantilla->asigna_variables($this->vars);
-                $html .=  $this->plantilla->muestra($code)."\n";
+                $html .=  $plantilla->muestra($code)."\n";
  
             }
         }
