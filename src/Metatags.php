@@ -13,7 +13,7 @@ class Metatags
     var $hreflang;
     var $image;
     var $vars;
-    var $plantilla
+    var $plantilla;
 
     function __construct() {
         $this->titulo = "";
