@@ -150,7 +150,7 @@ class FRANKY
                       $str =  substr($llave,3);
 
 
-                      if(preg_match("/^".str_replace("/","+\/",$str)."$/i", $seccion))
+                      if(preg_match("/^".str_replace(["/","."],["+\/","+\."],$str)."$/i", $seccion))
                       {
                           $seccion = $key;
                           break;

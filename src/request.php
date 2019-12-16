@@ -22,9 +22,11 @@ class request
         foreach ($uri as $k => $v)
         {
 
-            if(isset($params[$k]) && preg_match("/^\[([a-z0-9-_]+)\]$/i",$params[$k],$variable))
+            $info = pathinfo($params[$k]);
+
+            if(isset($params[$k]) && preg_match("/^\[([a-z0-9-_]+)\]$/i",basename($params[$k],'.'.$info['extension']),$variable))
             {
-                $this->urlparam[$variable[1]] = $uri[$k];
+                $this->urlparam[$variable[1]] = basename($uri[$k],'.'.$info['extension']);
             }
         }
     }
