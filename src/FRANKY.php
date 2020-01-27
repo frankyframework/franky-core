@@ -111,7 +111,7 @@ class FRANKY
   function getUiCommand($key=null)
   {
 
-      if($key == null)
+      if($key === null)
       {
           return $this->m_uiCommand;
       }
