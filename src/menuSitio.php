@@ -8,23 +8,6 @@ class menuSitio{
         $this->menu = array();
     }
 
-    function setSeccion($permisos,$url,$etiqueta,$seccion="default")
-    {
-        global $MyRequest;
-
-        $this->menu[$seccion][] = array($permisos,$MyRequest->link($url),$etiqueta);
-
-
-    }
-
-    function setTitle($title,$seccion="default")
-    {
-
-
-        $this->menu[$seccion]['title'] = $title;
-
-
-    }
 
     function setArraySeccion($archivo,$name)
     {
@@ -32,24 +15,9 @@ class menuSitio{
         if(file_exists($archivo))
         {
             $menuXML = include($archivo);
+            $this->menu[$name] = $menuXML;
 
-            if(isset($menuXML['title'])){
-                $this->setTitle($menuXML['title'],$name);
-                unset($menuXML['title']);
-            }
-            foreach ($menuXML as $_menuXML)
-            {
-
-                $permisos = $_menuXML["permiso"];
-
-                $url = $_menuXML["url"];
-
-
-                $this->setSeccion($permisos,$url,$_menuXML["etiqueta"],$name);
-
-            }
         }
-
     }
 
     function getItemMenu($formato="<li><a href=\"%s\">%s</a></li>")
@@ -75,39 +43,43 @@ class menuSitio{
     function getMenu()
     {
         global $MyAccessList;
+        global $MyRequest;
         $html = "";
+       
         $total_links = 0;
-        foreach($this->menu as $name_menu => $_menu)
+        $machote = "%s";
+        foreach($this->menu as $name_menu => $menu)
         {
-            $_html = "<ul class='$name_menu'>";
-
-            if(isset($_menu['title'])){
-                 $_html .= "<li class=\"\"><b>".$_menu['title']."</b></li>";
-                 unset($_menu['title']);
-
-
-            }
-
-
+             
             
-            $total_links = 0;
-            foreach($_menu as $__menu)
+            foreach($menu as $_menu)
             {
-                if($MyAccessList->MeDasChancePasar($__menu[0])):
+               
+                $machote = "<li class=\"title $name_menu\"><b>".$_menu['title']."</b>"
+                        . "<ul class='children'>%s</ul></li>";
+
+               
+
+                $_html = "";
+                $total_links = 0;
+                foreach($_menu['children'] as $node => $__menu)
+                {
+                    if($MyAccessList->MeDasChancePasar($__menu['permiso'])):
 
 
-                    $_html .= "<li class=\"".str_replace("/","-",trim($__menu[1],"/"))."\"><a href=\"".$__menu[1]."\">".$__menu[2]."</a></li>";
+                        $_html .= "<li class=\"".str_replace("/","-",trim($__menu['url'],"/"))."\"><a href=\"".$__menu['url']."\">".$__menu['etiqueta']."</a></li>";
 
 
-                    $total_links++;
+                        $total_links++;
 
-                endif;
-            }
-            $_html .= "</ul>";
+                    endif;
+                }
 
-            if($total_links > 0)
-            {
-              $html .= $_html;
+
+                if($total_links > 0)
+                {
+                    $html .= sprintf($machote,$_html);
+                }
             }
         }
 
