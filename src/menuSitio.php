@@ -28,11 +28,11 @@ class menuSitio{
 
         foreach($this->menu as $name_menu => $_menu)
         {
-
+            
             foreach($_menu as $__menu)
             {
-
-                  $html .= sprintf($formato,$__menu[1],$__menu[2]);
+                
+                  $html .= sprintf($formato,$__menu['url'],$__menu['etiqueta']);
 
             }
 
