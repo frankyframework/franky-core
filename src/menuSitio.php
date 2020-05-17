@@ -55,7 +55,7 @@ class menuSitio{
             foreach($menu as $_menu)
             {
                
-                $machote = "<li class=\"title $name_menu\"><b>".$_menu['title']."</b>"
+                $machote = "<li class=\"title ".$this->getFriendly($_menu['title'])."\"><h3>".$_menu['title']."</h3>"
                         . "<ul class='children'>%s</ul></li>";
 
                
@@ -84,6 +84,22 @@ class menuSitio{
         }
 
         return $html;
+    }
+    
+    
+    function getFriendly($string)
+    {
+            $string = trim($string);
+            $string = trim($string,"?");
+            $a = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ';
+            $b = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr';
+            $string = utf8_decode($string);
+            $string = strtr($string, utf8_decode($a), $b);
+            $string = strtolower($string);
+            $string = preg_replace('#([^.a-z0-9]+)#i', '-', $string);
+            $string = preg_replace('#-{2,}#','-',$string);
+            $string = trim($string,"-");
+            return $string;
     }
 
 }
