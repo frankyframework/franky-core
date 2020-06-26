@@ -15,6 +15,7 @@ class FRANKY
         private $m_name;
         private $m_id;
 	private $m_is_admin;
+        private $m_layout;
 
 
 	function __construct()
@@ -28,6 +29,7 @@ class FRANKY
 		$this->m_jquery		= "";
 		$this->m_seccion 	= "";
 		$this->m_permisos	= "";
+                $this->m_layout	= "";
 		$this->m_is_admin	= false;
     $this->m_modulo         = "";
     $this->m_uiCommand      = array();
@@ -59,6 +61,11 @@ class FRANKY
 	{
 		return $this->m_php;
 	}
+        
+        function MyLayout()
+	{
+		return $this->m_layout;
+	}
 
 
         function MyModulo()
@@ -84,6 +91,10 @@ class FRANKY
   function setPHPFile($file)
 	{
 		$this->m_php = $file;
+  }
+    function setLayout($file)
+	{
+		$this->m_layout = $file;
   }
 
 	function addCss($css)
@@ -111,7 +122,7 @@ class FRANKY
   function getUiCommand($key=null)
   {
 
-      if($key === null)
+      if($key == null)
       {
           return $this->m_uiCommand;
       }
