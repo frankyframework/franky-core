@@ -85,7 +85,7 @@ class LOGIN
                         $sql_user = $this->m_user."='$usuario'";
                     }
 
-                $consulta .= $sql_user.") AND ".$this->m_pass."='$hash' ";
+                $consulta .= $sql_user.") ";
 
 
                 if(!empty($this->m_extra_valids))
@@ -125,6 +125,15 @@ class LOGIN
                     foreach ($this->m_inputs as $input)
                     {
                         $this->{$input} 		= $registro[$input];
+                    }
+                    
+                    if($this->m_pass != 1)
+                    {
+                        
+                        if(!password_verify($hash,$this->{$this->m_pass}))
+                        {
+                            return LOGIN_DBFAILURE;
+                        }
                     }
 
 
