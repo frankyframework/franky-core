@@ -52,13 +52,19 @@ class Metatags
     {
         $this->keywords = $keywords;
     }
-    function setCss($css)
+     function setCss($css)
     {
-        $this->css[] = $css;
+        if(!in_array($css,$this->css))
+        {
+            $this->css[] = $css;
+        }
     }
     function setJs($js)
     {
-        $this->js[] = $js;
+        if(!in_array($js,$this->js))
+        {
+            $this->js[] = $js;
+        }
     }
     function setHreflang($lang,$link)
     {
