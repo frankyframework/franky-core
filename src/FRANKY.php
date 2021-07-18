@@ -58,7 +58,7 @@ class FRANKY
 		return $this->m_is_admin;
 	}
 
-	function isAcount()
+	function isAccount()
 	{
 		return $this->m_is_account;
 	}
