@@ -5,34 +5,36 @@ class FRANKY
 {
 	private $m_ajax;
 	private $m_js;
-        private $m_css;
+	private $m_css;
 	private $m_jquery;
 	private $m_php;
 	private $m_permisos;
 	private $m_seccion;
-        private $m_uiCommand;
-        private $m_modulo;
-        private $m_name;
-        private $m_id;
+	private $m_uiCommand;
+	private $m_modulo;
+	private $m_name;
+	private $m_id;
 	private $m_is_admin;
-        private $m_layout;
+	private $m_is_account;
+	private $m_layout;
 
 
 	function __construct()
 	{
 		$this->m_id		= 0;
-                $this->m_name		= "";
-                $this->m_ajax		= "";
+		$this->m_name		= "";
+		$this->m_ajax		= "";
 		$this->m_js		= "";
-                $this->m_css		= "";
+		$this->m_css		= "";
 		$this->m_php		= "";
 		$this->m_jquery		= "";
 		$this->m_seccion 	= "";
 		$this->m_permisos	= "";
-                $this->m_layout	= "";
+		$this->m_layout	= "";
 		$this->m_is_admin	= false;
-    $this->m_modulo         = "";
-    $this->m_uiCommand      = array();
+		$this->m_is_account	= false;
+		$this->m_modulo         = "";
+		$this->m_uiCommand      = array();
 	}
 
   function MyId()
@@ -54,6 +56,11 @@ class FRANKY
 	function isAdmin()
 	{
 		return $this->m_is_admin;
+	}
+
+	function isAcount()
+	{
+		return $this->m_is_account;
 	}
 
 
@@ -88,14 +95,14 @@ class FRANKY
 		return $this->m_css;
         }
 
-  function setPHPFile($file)
-	{
-		$this->m_php = $file;
-  }
-    function setLayout($file)
-	{
-		$this->m_layout = $file;
-  }
+  	function setPHPFile($file)
+		{
+			$this->m_php = $file;
+	}
+		function setLayout($file)
+		{
+			$this->m_layout = $file;
+	}
 
 	function addCss($css)
 	{
@@ -213,12 +220,22 @@ class FRANKY
 				$this->m_is_admin = true;
 
 			}
+			if($_seccion[0] == PATH_ACCOUNT)
+			{
+				$this->m_is_account = true;
+
+			}
 		}
 		else {
 
 			if($_seccion[1] == PATH_ADMIN)
 			{
 				$this->m_is_admin = true;
+			}
+			if($_seccion[0] == PATH_ACCOUNT)
+			{
+				$this->m_is_account = true;
+
 			}
 		}
 
