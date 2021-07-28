@@ -109,6 +109,11 @@ class FRANKY
 		 $this->m_css[] = $css;
 	}
 
+	function addJquery($jquery)
+	{
+		 $this->m_jquery[] = $jquery;
+	}
+
 	function MySeccion()
 	{
 		return $this->m_seccion;
