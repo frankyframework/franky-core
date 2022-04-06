@@ -188,64 +188,44 @@ class FRANKY
 
 	function crearMonstruo($seccion)
 	{
+			
+		$seccion = $this->getSeccion($seccion);
 
-
-		global $MySession;
-    global $MyRequest;
-    global $MyRequest;
-    global $MyFlashMessage;
-    global $MyMessageAlert;
-
-    $seccion = $this->getSeccion($seccion);
-
-        if(!isset($this->m_uiCommand[$seccion]) )
-	  {
-	      return false;
-	  }
+		if(!isset($this->m_uiCommand[$seccion]) )
+		{
+			return false;
+		}
 
 
 		$this->m_permisos	= $this->m_uiCommand[$seccion]['0'];
 		$this->m_js		= $this->m_uiCommand[$seccion]['1'];
-    $this->m_css		= $this->m_uiCommand[$seccion]['2'];
+    	$this->m_css		= $this->m_uiCommand[$seccion]['2'];
 		$this->m_jquery		= $this->m_uiCommand[$seccion]['3'];
 		$this->m_ajax		= $this->m_uiCommand[$seccion]['4'];
 		$this->m_php		= $this->m_uiCommand[$seccion]['5'];
-    $this->m_modulo		= $this->m_uiCommand[$seccion]['6'];
-    $this->m_id		= $this->m_uiCommand[$seccion]['7'];
-    $this->m_name		= $this->m_uiCommand[$seccion]['8'];
+		$this->m_modulo		= $this->m_uiCommand[$seccion]['6'];
+		$this->m_id		= $this->m_uiCommand[$seccion]['7'];
+		$this->m_name		= $this->m_uiCommand[$seccion]['8'];
 
-    $this->m_seccion = $seccion;
+    	$this->m_seccion = $seccion;
 
 
 		$_seccion = explode("/",$seccion);
-		if(PREFIDIOMA=="")
+		
+		if($_seccion[0] == PATH_ADMIN)
 		{
-			if($_seccion[0] == PATH_ADMIN)
-			{
-				$this->m_is_admin = true;
+			$this->m_is_admin = true;
 
-			}
-			if($_seccion[0] == PATH_ACCOUNT)
-			{
-				$this->m_is_account = true;
-
-			}
 		}
-		else {
+		if($_seccion[0] == PATH_ACCOUNT)
+		{
+			$this->m_is_account = true;
 
-			if($_seccion[1] == PATH_ADMIN)
-			{
-				$this->m_is_admin = true;
-			}
-			if($_seccion[0] == PATH_ACCOUNT)
-			{
-				$this->m_is_account = true;
-
-			}
 		}
+	
 
 
-    return true;
+    	return true;
 	}
 }
 
