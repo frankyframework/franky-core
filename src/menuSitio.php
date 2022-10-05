@@ -15,8 +15,14 @@ class menuSitio{
         if(file_exists($archivo))
         {
             $menuXML = include($archivo);
-            $this->menu[$name] = $menuXML;
-
+            foreach($menuXML as $modulo => $item)
+            {
+                foreach($item['children'] as $item_menu)
+                {
+                    $this->menu[$item['title']][] = $item_menu;
+                }
+            }
+            
         }
     }
 
@@ -48,39 +54,31 @@ class menuSitio{
        
         $total_links = 0;
         $machote = "%s";
-        foreach($this->menu as $name_menu => $menu)
+        foreach($this->menu as $title => $menu)
         {
-             
-            
-            foreach($menu as $_menu)
+            $machote = "<li class=\"title ".$this->getFriendly($title)."\"><h3>".$title."</h3>"
+            . "<ul class='children'>%s</ul></li>";
+            $_html = "";
+            $total_links = 0;
+            foreach($menu as $__menu)
             {
-               
-                $machote = "<li class=\"title ".$this->getFriendly($_menu['title'])."\"><h3>".$_menu['title']."</h3>"
-                        . "<ul class='children'>%s</ul></li>";
-
-               
-
-                $_html = "";
-                $total_links = 0;
-                foreach($_menu['children'] as $node => $__menu)
-                {
-                    if($MyAccessList->MeDasChancePasar($__menu['permiso'])):
+                if($MyAccessList->MeDasChancePasar($__menu['permiso'])):
 
 
-                        $_html .= "<li class=\"".str_replace("/","-",trim($__menu['url'],"/"))."\"><a href=\"".$__menu['url']."\">".$__menu['etiqueta']."</a></li>";
+                    $_html .= "<li class=\"".str_replace("/","-",trim($__menu['url'],"/"))."\"><a href=\"".$__menu['url']."\">".$__menu['etiqueta']."</a></li>";
 
 
-                        $total_links++;
+                    $total_links++;
 
-                    endif;
-                }
+                endif;
+                
 
-
+            }
                 if($total_links > 0)
                 {
                     $html .= sprintf($machote,$_html);
                 }
-            }
+            
         }
 
         return $html;
