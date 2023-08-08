@@ -7,24 +7,22 @@ Class AccessList
 
         function __construct()
         {
-           global $_asignar_roles;
           
            $this->m_permisos = array();  
-            #print_r($this->m_permisos);
         }
         
-        function addRoll($nivel,$seccion)
+        function addRoll($seccion)
         {
-            $this->m_permisos[$nivel][] = $seccion;
+            $this->m_permisos[] = $seccion;
         }
 	
-        function removeRoll($nivel,$seccion)
+        function removeRoll($seccion)
         {
-            foreach($this->m_permisos[$nivel] as $k => $v)
+            foreach($this->m_permisos as $k => $v)
             {
                 if($v == $seccion)
                 {
-                    unset($this->m_permisos[$nivel][$k]);
+                    unset($this->m_permisos[$k]);
                 }
             }
         }
@@ -32,25 +30,11 @@ Class AccessList
         function MeDasChancePasar($seccion)
         {     
             global $MySession;
-            
-            if($MySession->LoggedIn())
+            if(in_array($seccion,$this->m_permisos))
             {
-                if(in_array($seccion,$this->m_permisos[$MySession->GetVar('nivel')]))
-                {
-                    
-                    return true;
+                
+                return true;
 
-                }
-
-      
-            }
-            else
-            {
-                if(isset($this->m_permisos[NIVEL_USERPUBLICO]) && in_array($seccion,$this->m_permisos[NIVEL_USERPUBLICO]))
-                {
-                    return true;
-
-                }
             }
             
             return false;

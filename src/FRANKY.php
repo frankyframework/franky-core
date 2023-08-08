@@ -8,7 +8,7 @@ class FRANKY
 	private $m_css;
 	private $m_jquery;
 	private $m_php;
-	private $m_permisos;
+	private $m_resource;
 	private $m_seccion;
 	private $m_uiCommand;
 	private $m_modulo;
@@ -29,7 +29,7 @@ class FRANKY
 		$this->m_php		= "";
 		$this->m_jquery		= "";
 		$this->m_seccion 	= "";
-		$this->m_permisos	= "";
+		$this->m_resource	= "";
 		$this->m_layout	= "";
 		$this->m_is_admin	= false;
 		$this->m_is_account	= false;
@@ -121,9 +121,9 @@ class FRANKY
 
 
 
-  function MyPermisos()
+  function MyResource()
 	{
-		return $this->m_permisos;
+		return $this->m_resource;
 	}
 
   function pushCommand($key,$array_content)
@@ -197,7 +197,7 @@ class FRANKY
 		}
 
 
-		$this->m_permisos	= $this->m_uiCommand[$seccion]['0'];
+		$this->m_resource	= $this->m_uiCommand[$seccion]['0'];
 		$this->m_js		= $this->m_uiCommand[$seccion]['1'];
     	$this->m_css		= $this->m_uiCommand[$seccion]['2'];
 		$this->m_jquery		= $this->m_uiCommand[$seccion]['3'];
