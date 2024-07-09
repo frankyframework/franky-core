@@ -125,7 +125,7 @@ class Metatags
     }
     function getCss()
     {
-        $html = "<link href=\"%s\" rel=\"stylesheet\" type='text/css'  />";
+        $html = "<link href=\"%s\" rel=\"stylesheet\" type='text/css' >";
         $css = "";
         if(!empty($this->css ))
         {
