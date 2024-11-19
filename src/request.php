@@ -24,7 +24,7 @@ class request
 
             $info = pathinfo($params[$k]);
 
-            if(isset($params[$k]) && preg_match("/^\[([a-z0-9-_]+)\]$/i",basename($params[$k],'.'.$info['extension']),$variable))
+            if(isset($params[$k]) && preg_match("/^\[([a-z0-9-_]+)\]$/i",basename($params[$k],'.'.(isset($info['extension']) ? $info['extension']:'')),$variable))
             {
                 $this->urlparam[$variable[1]] = basename($uri[$k],'.'.$info['extension']);
             }

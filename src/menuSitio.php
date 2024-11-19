@@ -15,14 +15,17 @@ class menuSitio{
         if(file_exists($archivo))
         {
             $menuXML = include($archivo);
-            foreach($menuXML as $modulo => $item)
-            {
-                foreach($item['children'] as $item_menu)
+            if(!empty($menuXML)) {
+                foreach($menuXML as $modulo => $item)
                 {
-                    $this->menu[$item['title']][] = $item_menu;
+                    if(!empty($item['children'])) {
+                    foreach($item['children'] as $item_menu)
+                        {
+                            $this->menu[$item['title']][] = $item_menu;
+                        }
+                    }
                 }
-            }
-            
+            } 
         }
     }
 
@@ -91,8 +94,8 @@ class menuSitio{
             $string = trim($string,"?");
             $a = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ';
             $b = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr';
-            $string = utf8_decode($string);
-            $string = strtr($string, utf8_decode($a), $b);
+            $string = mb_convert_encoding($string,'ISO-8859-1', 'UTF-8');
+            $string = strtr($string, mb_convert_encoding($a,'ISO-8859-1', 'UTF-8'), $b);
             $string = strtolower($string);
             $string = preg_replace('#([^.a-z0-9]+)#i', '-', $string);
             $string = preg_replace('#-{2,}#','-',$string);

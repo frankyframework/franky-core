@@ -52,13 +52,12 @@ class Plantilla
                 $this->m_html = preg_replace('#\{([a-z0-9\-_]*?)\}#is', "' . $\\1 . '", $this->m_html);
                   $this->m_html = preg_replace('#\%7B([a-z0-9\-_]*?)\%7D#is', "' . $\\1 . '", $this->m_html);
                 reset ($this->m_vars);
-                while (list($key, $val) = each($this->m_vars)) {
+                foreach ($this->m_vars as $key => $val) {
                     $$key = $val;
                 }
                 eval("\$this->m_html = '$this->m_html';");
                 reset ($this->m_vars);
-                while (list($key, $val) = each($this->m_vars))
-                {
+                foreach ($this->m_vars as $key => $val) {
                     unset($$key);
                 }
 
