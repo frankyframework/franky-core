@@ -18,15 +18,16 @@ class request
         $uri = explode("/",  trim($this->getURI(),"/"));
         $this->urlparam = array();
         $variable = array();
-
+      
         foreach ($uri as $k => $v)
         {
+            if(isset($params[$k])) {
+                $info = pathinfo($params[$k]);
 
-            $info = pathinfo($params[$k]);
-
-            if(isset($params[$k]) && preg_match("/^\[([a-z0-9-_]+)\]$/i",basename($params[$k],'.'.(isset($info['extension']) ? $info['extension']:'')),$variable))
-            {
-                $this->urlparam[$variable[1]] = basename($uri[$k],'.'.$info['extension']);
+                if(isset($params[$k]) && preg_match("/^\[([a-z0-9-_]+)\]$/i",basename($params[$k],'.'.(isset($info['extension']) ? $info['extension']:'')),$variable))
+                {
+                    $this->urlparam[$variable[1]] = basename($uri[$k],'.'.$info['extension']);
+                }
             }
         }
     }
