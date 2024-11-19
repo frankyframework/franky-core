@@ -12,6 +12,7 @@ class paginacion
     private $campo_orden;
     private $tamanos_validos;
     private $tamppage_default;
+    private $paginas_visibles;
     private $request;
 
     function __construct() {
