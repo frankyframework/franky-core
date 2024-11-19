@@ -4,10 +4,12 @@ namespace Franky\Core;
 class LOGIN
 {
         protected $m_inputs;
+        protected $m_values;
         protected $m_user;
         protected $m_pass;
         protected $m_tabla;
         protected $m_extra_valids;
+        protected $m_ibd;
 
         function __construct($tabla = "",$user = "",$pass="",$extra = array(),$conexion = 'conexion_bd')
         {
@@ -26,7 +28,7 @@ class LOGIN
                     {
                         foreach($this->m_inputs as $input)
                         {
-                            $this->{$input} = "";
+                            $this->m_values[$input] = "";
                         }
                     }
                 }
@@ -61,9 +63,12 @@ class LOGIN
                 return LOGIN_SUCCESS;
         }
 
-        public function getInputs()
+        public function getInputs($id = '')
         {
-            return $this->m_inputs;
+            if(!empty($id))  {
+                return $this->m_values['id'];
+            }
+            return $this->m_values;
         }
 
         public function setLogin($usuario, $hash)
@@ -124,13 +129,13 @@ class LOGIN
                 {
                     foreach ($this->m_inputs as $input)
                     {
-                        $this->{$input} 		= $registro[$input];
+                        $this->m_values[$input] = $registro[$input];
                     }
                     
                     if($this->m_pass != 1)
                     {
                         
-                        if(!password_verify($hash,$this->{$this->m_pass}))
+                        if(!password_verify($hash,$this->m_values[$this->m_pass]))
                         {
                             return LOGIN_DBFAILURE;
                         }
