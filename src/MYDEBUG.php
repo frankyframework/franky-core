@@ -10,6 +10,7 @@ class MYDEBUG
     var $PHP_TUSAGE;
     var $PHP_RUSAGE;
     var $PHP_MEMORY_USAGE;
+    public const PHP_ERROR_LOG = "logs/error_php.log";
 
     function __construct()
     {
@@ -87,9 +88,9 @@ class MYDEBUG
         private function getPhpErrors()
         {
             $html = "<ul>";
-            if(file_exists(PHP_ERROR_LOG))
+            if(file_exists(self::PHP_ERROR_LOG))
             {
-                $fp = fopen(PHP_ERROR_LOG,"r");
+                $fp = fopen(self::PHP_ERROR_LOG,"r");
 
                 while(!feof($fp)) {
 
