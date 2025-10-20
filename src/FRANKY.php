@@ -147,7 +147,7 @@ class FRANKY
   {
           if(empty($seccion))
           {
-             $seccion=HOME;
+             $seccion=\HOME;
           }
 
           if(!isset($this->m_uiCommand[$seccion]))
