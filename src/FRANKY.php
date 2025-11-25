@@ -147,7 +147,7 @@ class FRANKY
   {
           if(empty($seccion))
           {
-             $seccion=\HOME;
+             $seccion="";
           }
 
           if(!isset($this->m_uiCommand[$seccion]))
@@ -188,7 +188,6 @@ class FRANKY
 
 	function crearMonstruo($seccion)
 	{
-			
 		$seccion = $this->getSeccion($seccion);
 
 		if(!isset($this->m_uiCommand[$seccion]) )
