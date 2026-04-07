@@ -173,6 +173,19 @@ class ImageResize
         return $this;
     }
 
+    public function webpImage($destination, $quality = 100)
+    {
+        if (in_array($this->source_type,[IMAGETYPE_GIF,IMAGETYPE_JPEG,IMAGETYPE_PNG])) {
+            $image = $this->source_image;
+            imagepalettetotruecolor($image);
+            imagealphablending($image, true);
+            imagesavealpha($image, true);
+        }
+        imagewebp($image, $destination, $quality);
+
+ 
+    }
+
     /**
      * Convert the image to string
      *
