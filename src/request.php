@@ -83,7 +83,7 @@ class request
             $url_location = str_replace("//","/",$url_location);
         }
         else {
-            $url_location = $url_disec["scheme"]."://".$url_disec["host"].$url_disec["path"].(!empty($url_disec["query"]) ? "?".$url_disec["query"] : "");
+            $url_location = $url_disec["scheme"]."://".$url_disec["host"].(!in_array($_SERVER['SERVER_PORT'],[443,80,'']) ? ":".$_SERVER['SERVER_PORT'] : '').$url_disec["path"].(!empty($url_disec["query"]) ? "?".$url_disec["query"] : "");
         }
 
         return $url_location;
