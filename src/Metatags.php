@@ -182,16 +182,16 @@ class Metatags
     /**
      * Se complete array jl-json
      *
-     * @param array $json
+     * @param array|null $json
      */
-    public function setLdJson(array $json) {
+    public function setLdJson(array |null $json) {
         $this->ldJson = $json;
     }
     
     function getLdJson()
     {
         $html = "";
-        if(!empty($this->ldJson)){
+        if(!is_null($this->ldJson) && !empty($this->ldJson)){
             $html ='<script type="application/ld+json">';
             $html .= json_encode($this->ldJson);
             $html .= '</script>';
