@@ -13,6 +13,7 @@ class Metatags
     var $hreflang;
     var $image;
     var $vars;
+    var $ldJson;
 
     function __construct() {
         $this->titulo = "";
@@ -21,6 +22,7 @@ class Metatags
         $this->autor = "";
         $this->js = array();
         $this->vars = array();
+        $this->ldJson = array();
         $this->css = array();
         $this->code = array();
         $this->hreflang = array();
@@ -174,6 +176,28 @@ class Metatags
      function getImage()
     {
         return $this->image;
+    }
+
+
+    /**
+     * Se complete array jl-json
+     *
+     * @param array $json
+     */
+    public function setLdJson(array $json) {
+        $this->ldJson = $json;
+    }
+    
+    function getLdJson()
+    {
+        $html = "";
+        if(!empty($this->ldJson)){
+            $html ='<script type="application/ld+json">';
+            $html .= json_encode($this->ldJson);
+            $html .= '</script>';
+        }
+
+        return $html;
     }
 
 }
