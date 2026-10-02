@@ -102,7 +102,7 @@ class MYDEBUG
                 }
 
                 fclose($fp);
-                unlink(PHP_ERROR_LOG);
+                unlink(self::PHP_ERROR_LOG);
             }
             $html .= "</ul>";
             return $html;
